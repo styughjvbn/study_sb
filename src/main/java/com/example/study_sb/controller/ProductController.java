@@ -1,10 +1,13 @@
 package com.example.study_sb.controller;
 
+import com.example.study_sb.common.Constants;
+import com.example.study_sb.common.exception.TempException;
 import com.example.study_sb.data.dto.ProductDto;
 import com.example.study_sb.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,6 +49,11 @@ public class ProductController {
     @DeleteMapping("/product/{productId}")
     public ProductDto deleteProduct(@PathVariable String productId) {
         return null;
+    }
+
+    @PostMapping("/product/exception")
+    public void exceptionTest() throws TempException{
+        throw new TempException(Constants.ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN,"의도한 에러가 발생하였습니다.");
     }
 
 }
